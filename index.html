@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Documentos - Luxe Intérieur</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Navegación Lateral -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>LI</h1>
+                <p>LUXE INTÉRIEUR</p>
+                <small>Gestión de Documentos</small>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-page="dashboard">📊 Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="factura">📄 Factura</a></li>
+                <li><a href="#" class="nav-link" data-page="cotizacion">💰 Cotización</a></li>
+                <li><a href="#" class="nav-link" data-page="contrato">📋 Contrato</a></li>
+                <li><a href="#" class="nav-link" data-page="catalogo">📚 Catálogo</a></li>
+                <li><a href="#" class="nav-link" data-page="folleto">📑 Folleto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h2 id="pageTitle">Dashboard</h2>
+                <div class="user-info">
+                    <span>Admin</span>
+                </div>
+            </header>
+
+            <!-- Páginas de Contenido -->
+            <div class="content">
+                
+                <!-- Dashboard -->
+                <div id="dashboard" class="page active">
+                    <div class="dashboard-container">
+                        <div class="welcome-section">
+                            <h3>Bienvenido a Gestión de Documentos</h3>
+                            <p>Sistema integral para la gestión de documentos de Luxe Intérieur</p>
+                        </div>
+                        
+                        <div class="mapa-procesos">
+                            <img src="img/MapaProcesos.jpeg" alt="Mapa de Procesos Luxe Intérieur" class="mapa-img">
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat-card">
+                                <h4>Documentos</h4>
+                                <p class="stat-number">5</p>
+                                <small>Tipos disponibles</small>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Procesos</h4>
+                                <p class="stat-number">9</p>
+                                <small>Pasos operativos</small>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Compromiso</h4>
+                                <p class="stat-number">100%</p>
+                                <small>Excelencia en cada detalle</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factura -->
+                <div id="factura" class="page">
+                    <div class="factura-container">
+                        <h3>Generar Factura</h3>
+                        
+                        <div class="form-section">
+                            <h4>Datos de la Factura</h4>
+                            <form id="facturaForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="numeroFactura">Número de Factura:</label>
+                                        <input type="text" id="numeroFactura" value="FAC-2024-001" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha:</label>
+                                        <input type="date" id="fecha" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cliente">Cliente:</label>
+                                        <input type="text" id="cliente" value="Cliente Ejemplo S.A." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nit">Teléfono:</label>
+                                        <input type="text" id="nit" value="555-555-5555" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group full">
+                                        <label for="direccion">Dirección:</label>
+                                        <input type="text" id="direccion" value="Calle Principal 123, Apartado 456" required>
+                                    </div>
+                                </div>
+
+                                <h4>Detalles de la Factura</h4>
+                                
+                                <div class="items-section">
+                                    <table class="items-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Descripción</th>
+                                                <th>Cantidad</th>
+                                                <th>Valor Unitario</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="itemsTableBody">
+                                            <tr class="item-row">
+                                                <td><input type="text" class="item-desc" value="Diseño de Espacios Interiores" required></td>
+                                                <td><input type="number" class="item-qty" value="1" min="1" step="1" required></td>
+                                                <td><input type="number" class="item-price" value="5000000" min="0" step="100" required></td>
+                                                <td class="item-subtotal">5000000</td>
+                                            </tr>
+                                            <tr class="item-row">
+                                                <td><input type="text" class="item-desc" value="Materiales Premium" required></td>
+                                                <td><input type="number" class="item-qty" value="1" min="1" step="1" required></td>
+                                                <td><input type="number" class="item-price" value="3000000" min="0" step="100" required></td>
+                                                <td class="item-subtotal">3000000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn-secondary" id="addItemBtn">+ Agregar Línea</button>
+                                </div>
+
+                                <div class="totales">
+                                    <div class="total-row">
+                                        <span>Subtotal:</span>
+                                        <input type="text" id="subtotal" value="0" readonly>
+                                    </div>
+                                    <div class="total-row">
+                                        <span>IVA (19%):</span>
+                                        <input type="text" id="iva" value="0" readonly>
+                                    </div>
+                                    <div class="total-row total-final">
+                                        <span>TOTAL:</span>
+                                        <input type="text" id="total" value="0" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn-primary" id="generatePdfBtn">📥 Generar PDF</button>
+                                    <button type="reset" class="btn-secondary">🔄 Limpiar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cotización -->
+                <div id="cotizacion" class="page">
+                    <div class="document-container">
+                        <h3>Formato de Cotización</h3>
+                        <p>Genera cotizaciones profesionales para tus proyectos</p>
+                        <div class="document-preview">
+                            <embed src="img/Formato de Cotización.pdf" type="application/pdf" width="100%" height="600"/>
+                        </div>
+                        <div class="document-actions">
+                            <a href="img/Formato de Cotización.pdf" download class="btn-primary">📥 Descargar Cotización</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contrato -->
+                <div id="contrato" class="page">
+                    <div class="document-container">
+                        <h3>Contrato de Servicios</h3>
+                        <p>Acuerdos profesionales con tus clientes</p>
+                        <div class="document-preview">
+                            <embed src="img/Contrato de Servicios.pdf" type="application/pdf" width="100%" height="600"/>
+                        </div>
+                        <div class="document-actions">
+                            <a href="img/Contrato de Servicios.pdf" download class="btn-primary">📥 Descargar Contrato</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catálogo -->
+                <div id="catalogo" class="page">
+                    <div class="document-container">
+                        <h3>Catálogo de Materiales</h3>
+                        <p>Consulta nuestro catálogo completo de materiales y servicios</p>
+                        <div class="document-preview">
+                            <embed src="img/Catálogo Materiales.pdf" type="application/pdf" width="100%" height="600"/>
+                        </div>
+                        <div class="document-actions">
+                            <a href="img/Catálogo Materiales.pdf" download class="btn-primary">📥 Descargar Catálogo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Folleto -->
+                <div id="folleto" class="page">
+                    <div class="document-container">
+                        <h3>Folleto Profesional</h3>
+                        <p>Conoce más sobre Luxe Intérieur y nuestros servicios</p>
+                        <div class="document-preview">
+                            <embed src="img/Folleto Profesional .pdf" type="application/pdf" width="100%" height="600"/>
+                        </div>
+                        <div class="document-actions">
+                            <a href="img/Folleto Profesional .pdf" download class="btn-primary">📥 Descargar Folleto</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Template para PDF (oculto) -->
+    <div id="pdfTemplate" style="display: none;">
+        <div id="facturaTemplate">
+            <!-- Se llena dinámicamente con JavaScript -->
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
