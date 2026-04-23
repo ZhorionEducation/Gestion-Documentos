@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Documentos - Luxe Intérieur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -18,12 +19,23 @@
             </div>
             
             <ul class="nav-menu">
-                <li><a href="#" class="nav-link active" data-page="dashboard">📊 Dashboard</a></li>
-                <li><a href="#" class="nav-link" data-page="factura">📄 Factura</a></li>
-                <li><a href="#" class="nav-link" data-page="cotizacion">💰 Cotización</a></li>
-                <li><a href="#" class="nav-link" data-page="contrato">📋 Contrato</a></li>
-                <li><a href="#" class="nav-link" data-page="catalogo">📚 Catálogo</a></li>
-                <li><a href="#" class="nav-link" data-page="folleto">📑 Folleto</a></li>
+                <li><a href="#" class="nav-link active" data-page="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li>
+                    <a href="#" class="nav-link nav-toggle"><i class="fas fa-shopping-cart"></i> Ventas</a>
+                    <ul class="nav-submenu">
+                        <li><a href="#" class="nav-link" data-page="factura"><i class="fas fa-file-invoice"></i> Facturación</a></li>
+                        <li><a href="#" class="nav-link" data-page="cotizacion"><i class="fas fa-quote-left"></i> Cotización</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link nav-toggle"><i class="fas fa-folder"></i> Documentos</a>
+                    <ul class="nav-submenu">
+                        <li><a href="#" class="nav-link" data-page="documentos"><i class="fas fa-list"></i> Ver Documentos</a></li>
+                        <li><a href="#" class="nav-link" data-page="contrato"><i class="fas fa-file-contract"></i> Contrato</a></li>
+                        <li><a href="#" class="nav-link" data-page="catalogo"><i class="fas fa-book"></i> Catálogo</a></li>
+                        <li><a href="#" class="nav-link" data-page="folleto"><i class="fas fa-newspaper"></i> Folleto</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 
@@ -44,27 +56,74 @@
                 <div id="dashboard" class="page active">
                     <div class="dashboard-container">
                         <div class="welcome-section">
-                            <h3>Bienvenido a Gestión de Documentos</h3>
+                            <h3><i class="fas fa-hand-wave"></i> Bienvenido a Gestión de Documentos</h3>
                             <p>Sistema integral para la gestión de documentos de Luxe Intérieur</p>
                         </div>
                         
                         <div class="mapa-procesos">
-                            <img src="img/MapaProcesos.jpeg" alt="Mapa de Procesos Luxe Intérieur" class="mapa-img">
+                            <div class="animated-circle-container">
+                                <div class="orbiting-circles">
+                                    <div class="orbit-item" style="--i: 0;">
+                                        <div class="small-circle">
+                                            <i class="fas fa-lightbulb"></i>
+                                            <span>Innovación</span>
+                                        </div>
+                                    </div>
+                                    <div class="orbit-item" style="--i: 1;">
+                                        <div class="small-circle">
+                                            <i class="fas fa-tasks"></i>
+                                            <span>Procesos</span>
+                                        </div>
+                                    </div>
+                                    <div class="orbit-item" style="--i: 2;">
+                                        <div class="small-circle">
+                                            <i class="fas fa-file-alt"></i>
+                                            <span>Documentos</span>
+                                        </div>
+                                    </div>
+                                    <div class="orbit-item" style="--i: 3;">
+                                        <div class="small-circle">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Calidad</span>
+                                        </div>
+                                    </div>
+                                    <div class="orbit-item" style="--i: 4;">
+                                        <div class="small-circle">
+                                            <i class="fas fa-cogs"></i>
+                                            <span>Gestión</span>
+                                        </div>
+                                    </div>
+                                    <div class="orbit-item" style="--i: 5;">
+                                        <div class="small-circle">
+                                            <i class="fas fa-users"></i>
+                                            <span>Equipo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="center-circle">
+                                    <button id="mapaToggleBtn" class="mapa-btn">
+                                        <span>Luxe Intérieur</span>
+                                        <span><i class="fas fa-map"></i></span>
+                                        <span>Sistema de gestion de documentos</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="stats">
                             <div class="stat-card">
-                                <h4>Documentos</h4>
+                                <h4><i class="fas fa-file-circle-check"></i> Documentos</h4>
                                 <p class="stat-number">5</p>
                                 <small>Tipos disponibles</small>
                             </div>
                             <div class="stat-card">
-                                <h4>Procesos</h4>
+                                <h4><i class="fas fa-project-diagram"></i> Procesos</h4>
                                 <p class="stat-number">9</p>
                                 <small>Pasos operativos</small>
                             </div>
                             <div class="stat-card">
-                                <h4>Compromiso</h4>
+                                <h4><i class="fas fa-star"></i> Compromiso</h4>
                                 <p class="stat-number">100%</p>
                                 <small>Excelencia en cada detalle</small>
                             </div>
@@ -75,10 +134,10 @@
                 <!-- Factura -->
                 <div id="factura" class="page">
                     <div class="factura-container">
-                        <h3>Generar Factura</h3>
+                        <h3><i class="fas fa-receipt"></i> Generar Factura</h3>
                         
                         <div class="form-section">
-                            <h4>Datos de la Factura</h4>
+                            <h4><i class="fas fa-info-circle"></i> Datos de la Factura</h4>
                             <form id="facturaForm">
                                 <div class="form-row">
                                     <div class="form-group">
@@ -136,7 +195,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn-secondary" id="addItemBtn">+ Agregar Línea</button>
+                                    <button type="button" class="btn-secondary" id="addItemBtn"><i class="fas fa-plus"></i> Agregar Línea</button>
                                 </div>
 
                                 <div class="totales">
@@ -155,8 +214,8 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="button" class="btn-primary" id="generatePdfBtn">📥 Generar PDF</button>
-                                    <button type="reset" class="btn-secondary">🔄 Limpiar</button>
+                                    <button type="button" class="btn-primary" id="generatePdfBtn"><i class="fas fa-download"></i> Generar PDF</button>
+                                    <button type="reset" class="btn-secondary"><i class="fas fa-redo"></i> Limpiar</button>
                                 </div>
                             </form>
                         </div>
@@ -166,13 +225,67 @@
                 <!-- Cotización -->
                 <div id="cotizacion" class="page">
                     <div class="document-container">
-                        <h3>Formato de Cotización</h3>
+                        <h3><i class="fas fa-quote-left"></i> Formato de Cotización</h3>
                         <p>Genera cotizaciones profesionales para tus proyectos</p>
                         <div class="document-preview">
                             <embed src="img/Formato de Cotización.pdf" type="application/pdf" width="100%" height="600"/>
                         </div>
                         <div class="document-actions">
-                            <a href="img/Formato de Cotización.pdf" download class="btn-primary">📥 Descargar Cotización</a>
+                            <a href="img/Formato de Cotización.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar Cotización</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentos (Vista General) -->
+                <div id="documentos" class="page">
+                    <div class="documentos-container">
+                        <h3><i class="fas fa-folder-open"></i> Centro de Documentos</h3>
+                        <p>Accede a todos los documentos disponibles</p>
+                        
+                        <div class="documentos-grid">
+                            <div class="documento-card">
+                                <div class="documento-header">
+                                    <h4><i class="fas fa-quote-left"></i> Cotización</h4>
+                                </div>
+                                <p class="documento-desc">Plantilla profesional para generar cotizaciones</p>
+                                <div class="documento-actions">
+                                    <button class="btn-secondary" onclick="document.getElementById('cotizacion').classList.add('active'); document.getElementById('dashboard').classList.remove('active'); document.querySelector('[data-page=cotizacion]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
+                                    <a href="img/Formato de Cotización.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
+                                </div>
+                            </div>
+
+                            <div class="documento-card">
+                                <div class="documento-header">
+                                    <h4><i class="fas fa-file-contract"></i> Contrato</h4>
+                                </div>
+                                <p class="documento-desc">Contrato de servicios profesionales</p>
+                                <div class="documento-actions">
+                                    <button class="btn-secondary" onclick="document.querySelector('[data-page=contrato]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
+                                    <a href="img/Contrato de Servicios.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
+                                </div>
+                            </div>
+
+                            <div class="documento-card">
+                                <div class="documento-header">
+                                    <h4><i class="fas fa-book"></i> Catálogo</h4>
+                                </div>
+                                <p class="documento-desc">Catálogo completo de materiales y servicios</p>
+                                <div class="documento-actions">
+                                    <button class="btn-secondary" onclick="document.querySelector('[data-page=catalogo]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
+                                    <a href="img/Catálogo Materiales.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
+                                </div>
+                            </div>
+
+                            <div class="documento-card">
+                                <div class="documento-header">
+                                    <h4><i class="fas fa-newspaper"></i> Folleto</h4>
+                                </div>
+                                <p class="documento-desc">Folleto profesional de Luxe Intérieur</p>
+                                <div class="documento-actions">
+                                    <button class="btn-secondary" onclick="document.querySelector('[data-page=folleto]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
+                                    <a href="img/Folleto Profesional .pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,13 +293,13 @@
                 <!-- Contrato -->
                 <div id="contrato" class="page">
                     <div class="document-container">
-                        <h3>Contrato de Servicios</h3>
+                        <h3><i class="fas fa-file-contract"></i> Contrato de Servicios</h3>
                         <p>Acuerdos profesionales con tus clientes</p>
                         <div class="document-preview">
                             <embed src="img/Contrato de Servicios.pdf" type="application/pdf" width="100%" height="600"/>
                         </div>
                         <div class="document-actions">
-                            <a href="img/Contrato de Servicios.pdf" download class="btn-primary">📥 Descargar Contrato</a>
+                            <a href="img/Contrato de Servicios.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar Contrato</a>
                         </div>
                     </div>
                 </div>
@@ -194,13 +307,13 @@
                 <!-- Catálogo -->
                 <div id="catalogo" class="page">
                     <div class="document-container">
-                        <h3>Catálogo de Materiales</h3>
+                        <h3><i class="fas fa-book"></i> Catálogo de Materiales</h3>
                         <p>Consulta nuestro catálogo completo de materiales y servicios</p>
                         <div class="document-preview">
                             <embed src="img/Catálogo Materiales.pdf" type="application/pdf" width="100%" height="600"/>
                         </div>
                         <div class="document-actions">
-                            <a href="img/Catálogo Materiales.pdf" download class="btn-primary">📥 Descargar Catálogo</a>
+                            <a href="img/Catálogo Materiales.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar Catálogo</a>
                         </div>
                     </div>
                 </div>
@@ -208,13 +321,13 @@
                 <!-- Folleto -->
                 <div id="folleto" class="page">
                     <div class="document-container">
-                        <h3>Folleto Profesional</h3>
+                        <h3><i class="fas fa-newspaper"></i> Folleto Profesional</h3>
                         <p>Conoce más sobre Luxe Intérieur y nuestros servicios</p>
                         <div class="document-preview">
                             <embed src="img/Folleto Profesional .pdf" type="application/pdf" width="100%" height="600"/>
                         </div>
                         <div class="document-actions">
-                            <a href="img/Folleto Profesional .pdf" download class="btn-primary">📥 Descargar Folleto</a>
+                            <a href="img/Folleto Profesional .pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar Folleto</a>
                         </div>
                     </div>
                 </div>
@@ -227,6 +340,16 @@
     <div id="pdfTemplate" style="display: none;">
         <div id="facturaTemplate">
             <!-- Se llena dinámicamente con JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal para Mapa de Procesos -->
+    <div id="mapaModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <img id="mapaImg" src="img/MapaProcesos.jpeg" alt="Mapa de Procesos Luxe Intérieur" class="mapa-img-modal">
+            </div>
         </div>
     </div>
 

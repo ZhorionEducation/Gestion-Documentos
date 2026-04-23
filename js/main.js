@@ -1,8 +1,29 @@
 // Esperar a que el DOM esté completamente listo
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Manejar menús desplegables
+    document.querySelectorAll('.nav-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const submenu = toggle.nextElementSibling;
+            const isOpen = submenu.classList.contains('open');
+            
+            // Cerrar todos los demás submenús
+            document.querySelectorAll('.nav-submenu.open').forEach(m => {
+                m.classList.remove('open');
+                m.previousElementSibling.classList.remove('open');
+            });
+            
+            // Abrir/cerrar actual
+            if (!isOpen) {
+                submenu.classList.add('open');
+                toggle.classList.add('open');
+            }
+        });
+    });
+    
     // Navegación entre páginas
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('.nav-link:not(.nav-toggle)').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = link.dataset.page;
@@ -22,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'dashboard': 'Dashboard',
                 'factura': 'Generar Factura',
                 'cotizacion': 'Formato de Cotización',
+                'documentos': 'Centro de Documentos',
                 'contrato': 'Contrato de Servicios',
                 'catalogo': 'Catálogo de Materiales',
                 'folleto': 'Folleto Profesional'
@@ -29,23 +51,56 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('pageTitle').textContent = titleMap[page] || 'Página';
         });
     });
+    
+    // Manejar botón del círculo del mapa
+    const mapaToggleBtn = document.getElementById('mapaToggleBtn');
+    const mapaModal = document.getElementById('mapaModal');
+    const modalClose = document.querySelector('.modal-close');
+    
+    if (mapaToggleBtn && mapaModal) {
+        mapaToggleBtn.addEventListener('click', () => {
+            mapaModal.classList.add('open');
+        });
+        
+        // Cerrar modal
+        if (modalClose) {
+            modalClose.addEventListener('click', () => {
+                mapaModal.classList.remove('open');
+            });
+        }
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        mapaModal.addEventListener('click', (e) => {
+            if (e.target === mapaModal) {
+                mapaModal.classList.remove('open');
+            }
+        });
+        
+        // Cerrar modal con la tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mapaModal.classList.contains('open')) {
+                mapaModal.classList.remove('open');
+            }
+        });
+        
+        // Manejar error de carga de imagen
+        const mapaImg = document.getElementById('mapaImg');
+        if (mapaImg) {
+            mapaImg.addEventListener('error', () => {
+                const modalBody = document.querySelector('.modal-body');
+                modalBody.innerHTML = `
+                    <div style="background-color: var(--dark-bg, #1a1a1a); border: 2px dashed var(--border-color, #333); 
+                                padding: 40px; text-align: center; border-radius: 4px; color: var(--text-muted, #b0b0b0); width: 100%;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
+                        <p style="margin: 10px 0; font-size: 14px;">📁 Imagen del Mapa de Procesos no encontrada</p>
+                    </div>
+                `;
+            });
+        }
+    }
 
     // Inicializar fecha actual
     document.getElementById('fecha').valueAsDate = new Date();
-
-    // Manejo de carga de imagen del mapa
-    const mapaImg = document.querySelector('.mapa-img');
-    if (mapaImg) {
-        mapaImg.addEventListener('error', () => {
-            const container = document.querySelector('.mapa-procesos');
-            container.innerHTML = `
-                <div style="background-color: var(--dark-bg, #1a1a1a); border: 2px dashed var(--border-color, #333); 
-                            padding: 40px; text-align: center; border-radius: 4px; color: var(--text-muted, #b0b0b0);">
-                    <p style="margin: 10px 0; font-size: 14px;">📁 Imagen del Mapa de Procesos no encontrada</p>
-                </div>
-            `;
-        });
-    }
 
     // Manejador de cálculos en la tabla
     function actualizarTotales() {
