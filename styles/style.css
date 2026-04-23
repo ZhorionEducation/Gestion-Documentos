@@ -334,6 +334,12 @@ body {
     padding: 20px;
 }
 
+#logoEmpresa {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
 .mapa-btn span {
     display: block;
     line-height: 1.2;
