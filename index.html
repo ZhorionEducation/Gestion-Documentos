@@ -7,9 +7,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link rel="shortcut icon" href="./img/Logo.png" type="image/x-icon">
 </head>
 <body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-container">
+            <h1><i class="fas fa-lock"></i> Acceso</h1>
+            <form class="login-form" id="loginForm">
+                <div id="loginError" class="login-error" style="display: none;"></div>
+                <div class="login-form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" placeholder="admin" required>
+                </div>
+                <div class="login-form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="••••••" required>
+                </div>
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Navegación Lateral -->
         <nav class="sidebar">
@@ -31,9 +52,9 @@
                     <a href="#" class="nav-link nav-toggle"><i class="fas fa-folder"></i> Documentos</a>
                     <ul class="nav-submenu">
                         <li><a href="#" class="nav-link" data-page="documentos"><i class="fas fa-list"></i> Ver Documentos</a></li>
-                        <li><a href="#" class="nav-link" data-page="contrato"><i class="fas fa-file-contract"></i> Contrato</a></li>
+                        <!-- <li><a href="#" class="nav-link" data-page="contrato"><i class="fas fa-file-contract"></i> Contrato</a></li>
                         <li><a href="#" class="nav-link" data-page="catalogo"><i class="fas fa-book"></i> Catálogo</a></li>
-                        <li><a href="#" class="nav-link" data-page="folleto"><i class="fas fa-newspaper"></i> Folleto</a></li>
+                        <li><a href="#" class="nav-link" data-page="folleto"><i class="fas fa-newspaper"></i> Folleto</a></li> -->
                     </ul>
                 </li>
             </ul>
@@ -45,7 +66,10 @@
             <header class="header">
                 <h2 id="pageTitle">Dashboard</h2>
                 <div class="user-info">
-                    <span>Admin</span>
+                    <span id="userName">Admin</span>
+                    <button id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
                 </div>
             </header>
 
@@ -64,46 +88,46 @@
                             <div class="animated-circle-container">
                                 <div class="orbiting-circles">
                                     <div class="orbit-item" style="--i: 0;">
-                                        <div class="small-circle">
-                                            <i class="fas fa-lightbulb"></i>
-                                            <span>Innovación</span>
+                                        <div class="small-circle" onclick="abrirModalImagen('img/imagenes/Cadena de Valor.png', 'Cadena de Valor')">
+                                            <img src="img/imagenes/Cadena de Valor.png" alt="Cadena de Valor">
+                                            <span>Cadena de Valor</span>
                                         </div>
                                     </div>
                                     <div class="orbit-item" style="--i: 1;">
-                                        <div class="small-circle">
-                                            <i class="fas fa-tasks"></i>
-                                            <span>Procesos</span>
+                                        <div class="small-circle" onclick="abrirModalImagen('img/imagenes/Mision y vision.jpeg', 'Misión y Visión')">
+                                            <img src="img/imagenes/Mision y vision.jpeg" alt="Misión y Visión">
+                                            <span>Misión y Visión</span>
                                         </div>
                                     </div>
                                     <div class="orbit-item" style="--i: 2;">
-                                        <div class="small-circle">
-                                            <i class="fas fa-file-alt"></i>
-                                            <span>Documentos</span>
+                                        <div class="small-circle" onclick="abrirModalImagen('img/imagenes/Organigrama Minimalista Blanco y Negro Equipo Creativo (2).png', 'Organigrama')">
+                                            <img src="img/imagenes/Organigrama Minimalista Blanco y Negro Equipo Creativo (2).png" alt="Organigrama">
+                                            <span>Organigrama</span>
                                         </div>
                                     </div>
                                     <div class="orbit-item" style="--i: 3;">
-                                        <div class="small-circle">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>Calidad</span>
+                                        <div class="small-circle" onclick="abrirModalImagen('img/imagenes/Política Ambiental.png', 'Política Ambiental')">
+                                            <img src="img/imagenes/Política Ambiental.png" alt="Política Ambiental">
+                                            <span>Política Ambiental</span>
                                         </div>
                                     </div>
                                     <div class="orbit-item" style="--i: 4;">
-                                        <div class="small-circle">
-                                            <i class="fas fa-cogs"></i>
-                                            <span>Gestión</span>
+                                        <div class="small-circle" onclick="abrirModalImagen('img/imagenes/Promesa de Valor.png', 'Promesa de Valor')">
+                                            <img src="img/imagenes/Promesa de Valor.png" alt="Promesa de Valor">
+                                            <span>Promesa de Valor</span>
                                         </div>
                                     </div>
                                     <div class="orbit-item" style="--i: 5;">
-                                        <div class="small-circle">
-                                            <i class="fas fa-users"></i>
-                                            <span>Equipo</span>
+                                        <div class="small-circle" onclick="abrirModalImagen('img/imagenes/Sistema de Excelencia...png', 'Sistema de Excelencia')">
+                                            <img src="img/imagenes/Sistema de Excelencia...png" alt="Sistema de Excelencia">
+                                            <span>Excelencia</span>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="center-circle">
                                     <button id="mapaToggleBtn" class="mapa-btn">
-                                        <span>Luxe Intérieur</span>
+                                        <span>Mapa de procesos</span>
                                         <span><i class="fas fa-map"></i></span>
                                         <span>Sistema de gestion de documentos</span>
                                     </button>
@@ -114,8 +138,8 @@
                         <div class="stats">
                             <div class="stat-card">
                                 <h4><i class="fas fa-file-circle-check"></i> Documentos</h4>
-                                <p class="stat-number">5</p>
-                                <small>Tipos disponibles</small>
+                                <p class="stat-number">37</p>
+                                <small>Disponibles</small>
                             </div>
                             <div class="stat-card">
                                 <h4><i class="fas fa-project-diagram"></i> Procesos</h4>
@@ -239,53 +263,45 @@
                 <!-- Documentos (Vista General) -->
                 <div id="documentos" class="page">
                     <div class="documentos-container">
-                        <h3><i class="fas fa-folder-open"></i> Centro de Documentos</h3>
-                        <p>Accede a todos los documentos disponibles</p>
+                        <div class="documentos-header">
+                            <h3><i class="fas fa-folder-open"></i> Centro de Documentos</h3>
+                            <p>Accede a todos los documentos disponibles</p>
+                        </div>
                         
-                        <div class="documentos-grid">
-                            <div class="documento-card">
-                                <div class="documento-header">
-                                    <h4><i class="fas fa-quote-left"></i> Cotización</h4>
-                                </div>
-                                <p class="documento-desc">Plantilla profesional para generar cotizaciones</p>
-                                <div class="documento-actions">
-                                    <button class="btn-secondary" onclick="document.getElementById('cotizacion').classList.add('active'); document.getElementById('dashboard').classList.remove('active'); document.querySelector('[data-page=cotizacion]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
-                                    <a href="img/Formato de Cotización.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
-                                </div>
+                        <div class="documentos-controls">
+                            
+
+                            <!-- Filtro Desplegable -->
+                            <div class="filter-container">
+                                <label for="categoryFilter"><i class="fas fa-filter"></i> Filtrar por Área:</label>
+                                <select id="categoryFilter">
+                                    <option value="todos">TODOS</option>
+                                    <option value="comercial">Área Comercial/Ventas</option>
+                                    <option value="operativa">Área Operativa/Proyectos</option>
+                                    <option value="compras">Área de Compras/Proveedores</option>
+                                    <option value="talento">Área de Talento Humano</option>
+                                    <option value="administrativa">Área Administrativa/Gerencial</option>
+                                    <option value="legal">Área Legal/Cumplimiento</option>
+                                    <option value="financiera">Área Financiera/Contable</option>
+                                </select>
                             </div>
 
-                            <div class="documento-card">
-                                <div class="documento-header">
-                                    <h4><i class="fas fa-file-contract"></i> Contrato</h4>
-                                </div>
-                                <p class="documento-desc">Contrato de servicios profesionales</p>
-                                <div class="documento-actions">
-                                    <button class="btn-secondary" onclick="document.querySelector('[data-page=contrato]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
-                                    <a href="img/Contrato de Servicios.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
-                                </div>
+                            <!-- Buscador -->
+                            <div class="search-bar">
+                                <input type="text" id="searchInput" placeholder="Buscar documentos por nombre o coincidencias...">
+                                <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
                             </div>
+                        </div>
 
-                            <div class="documento-card">
-                                <div class="documento-header">
-                                    <h4><i class="fas fa-book"></i> Catálogo</h4>
-                                </div>
-                                <p class="documento-desc">Catálogo completo de materiales y servicios</p>
-                                <div class="documento-actions">
-                                    <button class="btn-secondary" onclick="document.querySelector('[data-page=catalogo]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
-                                    <a href="img/Catálogo Materiales.pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
-                                </div>
-                            </div>
+                        <!-- Grid de documentos -->
+                        <div class="documentos-grid" id="documentosGrid">
+                            <!-- Se llenará dinámicamente con JavaScript -->
+                        </div>
 
-                            <div class="documento-card">
-                                <div class="documento-header">
-                                    <h4><i class="fas fa-newspaper"></i> Folleto</h4>
-                                </div>
-                                <p class="documento-desc">Folleto profesional de Luxe Intérieur</p>
-                                <div class="documento-actions">
-                                    <button class="btn-secondary" onclick="document.querySelector('[data-page=folleto]').click();"><i class="fas fa-eye"></i> Previsualizar</button>
-                                    <a href="img/Folleto Profesional .pdf" download class="btn-primary"><i class="fas fa-download"></i> Descargar</a>
-                                </div>
-                            </div>
+                        <!-- Mensaje sin documentos -->
+                        <div id="noDocuments" class="no-documents" style="display: none;">
+                            <i class="fas fa-search"></i>
+                            <p>No se encontraron documentos que coincidan con tu búsqueda</p>
                         </div>
                     </div>
                 </div>
@@ -349,6 +365,26 @@
             <button class="modal-close"><i class="fas fa-times"></i></button>
             <div class="modal-body">
                 <img id="mapaImg" src="img/MapaProcesos.jpeg" alt="Mapa de Procesos Luxe Intérieur" class="mapa-img-modal">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Visualizar Documentos -->
+    <div id="documentModal" class="modal">
+        <div class="modal-content document-modal-content">
+            <button class="modal-close" id="docModalClose"><i class="fas fa-times"></i></button>
+            <div class="document-modal-header">
+                <h3 id="docModalTitle">Documento</h3>
+            </div>
+            <div class="document-modal-body">
+                <div id="docModalContent">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+            <div class="document-modal-footer">
+                <a id="docModalDownloadBtn" href="#" download class="btn-primary">
+                    <i class="fas fa-download"></i> Descargar
+                </a>
             </div>
         </div>
     </div>
